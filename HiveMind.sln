@@ -5,6 +5,31 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "HiveMind.Aggregate", "HiveMind.Aggregate\HiveMind.Aggregate.njsproj", "{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Graph", "HiveMind.Graph\HiveMind.Graph.csproj", "{2503D842-C8A6-4553-A10C-4FD8242C2925}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HiveMind-Angular", "HiveMind-Angular\", "{63185545-8172-421F-B53E-FA6851729145}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55527"
+		Debug.AspNetCompiler.PhysicalPath = "HiveMind-Angular\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55527\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55527"
+		Release.AspNetCompiler.PhysicalPath = "HiveMind-Angular\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55527\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "55527"
+		SlnRelativePath = "HiveMind-Angular\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.CoreAPI", "HiveMind.CoreAPI\HiveMind.CoreAPI.csproj", "{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +40,18 @@ Global
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63185545-8172-421F-B53E-FA6851729145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63185545-8172-421F-B53E-FA6851729145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63185545-8172-421F-B53E-FA6851729145}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{63185545-8172-421F-B53E-FA6851729145}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
