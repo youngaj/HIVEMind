@@ -1,0 +1,3 @@
+﻿# HiveMind.Services.Work
+
+

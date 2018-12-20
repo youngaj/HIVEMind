@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "HiveMind.Aggregate", "HiveMind.Aggregate\HiveMind.Aggregate.njsproj", "{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Graph", "HiveMind.Graph\HiveMind.Graph.csproj", "{2503D842-C8A6-4553-A10C-4FD8242C2925}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HiveMind-Angular", "HiveMind-Angular\", "{63185545-8172-421F-B53E-FA6851729145}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -28,7 +26,17 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HiveMind-Angular", "HiveMin
 		SlnRelativePath = "HiveMind-Angular\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.CoreAPI", "HiveMind.CoreAPI\HiveMind.CoreAPI.csproj", "{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Ideas", "HiveMind.Services.Ideas\HiveMind.Services.Ideas.csproj", "{968D7B63-4732-4DD5-B220-20B2256512DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Problems", "HiveMind.Services.Problems\HiveMind.Services.Problems.csproj", "{4793C346-2C18-484D-AE4E-FE963FE17307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Projects", "HiveMind.Services.Projects\HiveMind.Services.Projects.csproj", "{6A4BA002-C827-45F9-9C11-4D021ED7807B}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "HiveMind.Services.Work", "HiveMind.Services.Work\HiveMind.Services.Work.njsproj", "{7495BA4E-ADDE-4D1A-A01A-B57C0270ECFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Graph", "HiveMind.Services.Graph\HiveMind.Services.Graph.csproj", "{5E24BB8B-E85E-42ED-BE33-EFCBE0C9C6C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Common", "HiveMind.Common\HiveMind.Common.csproj", "{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,18 +48,34 @@ Global
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13EBAFC9-345C-4DD4-9A6E-B594F0E14323}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2503D842-C8A6-4553-A10C-4FD8242C2925}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63185545-8172-421F-B53E-FA6851729145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63185545-8172-421F-B53E-FA6851729145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63185545-8172-421F-B53E-FA6851729145}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{63185545-8172-421F-B53E-FA6851729145}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9633DBCB-E5FA-4855-BD46-BCA249CF21F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{968D7B63-4732-4DD5-B220-20B2256512DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968D7B63-4732-4DD5-B220-20B2256512DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{968D7B63-4732-4DD5-B220-20B2256512DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968D7B63-4732-4DD5-B220-20B2256512DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4793C346-2C18-484D-AE4E-FE963FE17307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4793C346-2C18-484D-AE4E-FE963FE17307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4793C346-2C18-484D-AE4E-FE963FE17307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4793C346-2C18-484D-AE4E-FE963FE17307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4BA002-C827-45F9-9C11-4D021ED7807B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4BA002-C827-45F9-9C11-4D021ED7807B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4BA002-C827-45F9-9C11-4D021ED7807B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4BA002-C827-45F9-9C11-4D021ED7807B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7495BA4E-ADDE-4D1A-A01A-B57C0270ECFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7495BA4E-ADDE-4D1A-A01A-B57C0270ECFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7495BA4E-ADDE-4D1A-A01A-B57C0270ECFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7495BA4E-ADDE-4D1A-A01A-B57C0270ECFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E24BB8B-E85E-42ED-BE33-EFCBE0C9C6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E24BB8B-E85E-42ED-BE33-EFCBE0C9C6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E24BB8B-E85E-42ED-BE33-EFCBE0C9C6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E24BB8B-E85E-42ED-BE33-EFCBE0C9C6C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
