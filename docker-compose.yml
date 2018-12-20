@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  ideas-api:
+    image: HiveMind/Ideas
+    build:
+      context: ./HiveMind.Services.Ideas
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+
+  problems-api:
+    image: HiveMind/problems
+    build:
+      context: ./HiveMind.Services.Problems
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+
+  graph-api:
+    image: HiveMind/Graph
+    build:
+      context: ./HiveMind.Services.Graph
+      dockerfile: Dockerfile
+    depends_on:
+      - neo4j
+
+  mongodb:
+    image: mongo:3.2
+
+  neo4j:
+    image: neo4j:3.3.0
+
+  sql-data:
+    image: microsoft/mssql-server-linux:2017-GA

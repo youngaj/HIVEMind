@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  ideas-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApplicationInsights__InstrumentationKey=
+      - ConnectionStrings__DefaultConnection=Server=sql-data;Database=HiveMind.Ideas;User Id=sa;Password=Passw0rd!
+    ports:
+      - "6100:80"
+      
+  problems-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApplicationInsights__InstrumentationKey=
+      - ConnectionStrings__DefaultConnection=Server=sql-data;Database=HiveMind.Problems;User Id=sa;Password=Passw0rd!
+    ports:
+      - "6101:80"
+
+  graph-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApplicationInsights__InstrumentationKey=
+      - neo4j_URI=http://graph-api/
+      - neo4j_user=neo4j
+      - neo4j_password=Password=Passw0rd!
+      - neo4j=Server=sql-data;Database=HiveMind.Bookings;User Id=sa;Password=Passw0rd!
+    ports:
+      - "6102:80"
+
+  sql-data:
+    environment:
+      - MSSQL_SA_PASSWORD=Passw0rd!
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+    ports:
+      - "6433:1433"
+
+  neo4j:
+    environment:
+      - "NEO4J_AUTH:neo4j/Passw0rd!"
+    ports:
+      - "17474:7474"
+      - "7687:7687"
+    volumes:
+      - "./Docker/Neo4j/NEO4J_DATA:/var/lib/neo4j/data"
+      - "./Docker/Neo4j/NEO4J_LOGS:/logs"
+      - "./Docker/Neo4j/NEO4J_CONF:/var/lib/neo4j/conf"
