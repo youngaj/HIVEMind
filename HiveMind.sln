@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Graph", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Common", "HiveMind.Common\HiveMind.Common.csproj", "{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Search", "HiveMind.Services.Search\HiveMind.Services.Search.csproj", "{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83A13C07-FFB4-4D57-9AB4-BFAE8C8F7E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
