@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Common", "HiveMind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiveMind.Services.Search", "HiveMind.Services.Search\HiveMind.Services.Search.csproj", "{86FD4E00-4C55-4F02-9745-6D0D5B894CCF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{FB69F07F-19BF-4383-BC2C-CCDA447CC3C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
