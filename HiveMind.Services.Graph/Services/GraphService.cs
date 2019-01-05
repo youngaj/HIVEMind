@@ -12,13 +12,13 @@ namespace HiveMind.Services.Graph.Services
     {
         IResult AddNode(Entities.Node node);
 
-        IResult AddEdge(string source, string target, Edge relationship);
+        IResult AddEdge(Entities.Node source, Entities.Node target, Edge relationship);
 
         void Delete(string id);
 
         List<Entities.Node> GetNodes();
 
-        List<RelatedNode> GetRelatedNodes(string key);
+        List<RelatedNode> GetRelatedNodes(string type, string id);
 
         void UpdateNode(Entities.Node node);
 
@@ -34,7 +34,7 @@ namespace HiveMind.Services.Graph.Services
             _graphClient = graphClient;
         }
 
-        public IResult AddEdge(string source, string target, Edge relationship)
+        public IResult AddEdge(Entities.Node source, Entities.Node target, Edge relationship)
         {
             var result = ResultFactory.CreateInstance();
             result.Type = ResultType.Successful;
@@ -42,8 +42,8 @@ namespace HiveMind.Services.Graph.Services
             var relationshipName = relationship.Name;
             _graphClient.Cypher
                 .Match("(sourceNode)", "(targetNode)")
-                .Where((Entities.Node sourceNode) => sourceNode.Id == source)
-                .AndWhere((Entities.Node targetNode) => targetNode.Id == target)
+                .Where((Entities.Node sourceNode) => sourceNode.Type == source.Type && sourceNode.Id == source.Id)
+                .AndWhere((Entities.Node targetNode) => targetNode.Type == target.Type && target.Id == target.Id)
                 .Create("(sourceNode)-[:" + relationshipName + "]->(targetNode)")
                 .ExecuteWithoutResults();
 
@@ -90,8 +90,34 @@ namespace HiveMind.Services.Graph.Services
                             .ToList();
             return entities;
         }
+        public List<RelatedNode> GetRelatedNodes(string type, string id)
+        {
+            var results = _graphClient.Cypher
+                            .Match("(a)-[r]-(b)")
+                            .Where<Entities.Node>(a => a.Type == type && a.Id == id)
+                            .Return((a, r, b) => new
+                            {
+                                source = a.As<Entities.Node>(),
+                                target = b.As<Entities.Node>(),
+                                relationship = r.As<Relationship>().RelationshipTypeKey,
+                                relationshipData = r.As<Relationship>().Data
+                            })
+                            .Results;
 
-        public List<RelatedNode> GetRelatedNodes(string key)
+            var relatedEntities = new List<RelatedNode>();
+
+            foreach (var item in results)
+            {
+                var relatedEntity = new RelatedNode();
+                relatedEntity.Relationship = new Edge() { Data = item.relationshipData, Name = item.relationship };
+                relatedEntity.Node = item.target;
+                relatedEntities.Add(relatedEntity);
+            }
+
+            return relatedEntities;
+        }
+
+        public List<RelatedNode> GetRelatedNodes2(string key)
         {
             var query = new CypherFluentQuery(_graphClient)
                             .Match("(findEntity)-[(relation)]->(relatedEntity)")
@@ -132,7 +158,7 @@ namespace HiveMind.Services.Graph.Services
         {
             _graphClient.Cypher
                 .Merge("(node:" + node.Type + " { Id: {id}, Type: {type} })")
-                .OnCreate()
+                .OnMatch()
                 .Set("node = {nodeEntity}")
                 .WithParams(new
                 {

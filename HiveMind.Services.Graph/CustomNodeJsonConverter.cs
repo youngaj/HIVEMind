@@ -35,14 +35,18 @@ namespace HiveMind.Services.Graph
                 return null;
 
             //Load our object
+            var output = new Node();
+            object entity = null;
+
             JObject jObject = JObject.Load(reader);
-            var entityToken = jObject.Property("Entity").Value;
-            jObject.Remove("Entity");
+            var entityToken = jObject.Property("Entity")?.Value;
+            if(entityToken != null)
+            {
+                jObject.Remove("Entity");
+                entity = JsonConvert.DeserializeObject(entityToken?.ToString());
+            }
 
             //Get the entity ourselves and deserialize
-            var entity = JsonConvert.DeserializeObject(entityToken.ToString());
-
-            var output = new Node();
             output = JsonConvert.DeserializeObject<Node>(jObject.ToString());
 
             //Add our entity

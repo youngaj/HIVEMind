@@ -33,10 +33,10 @@ namespace HiveMind.Services.Graph.Controllers
         }
 
         // GET: api/Graph/12/Related
-        [HttpGet("{id}/Related")]
-        public IEnumerable<RelatedNode> GetRelated([FromRoute] string id)
+        [HttpGet("{type}/{id}/Related")]
+        public IEnumerable<RelatedNode> GetRelated(string type, string id)
         {
-            var nodes = _graphService.GetRelatedNodes(id);
+            var nodes = _graphService.GetRelatedNodes(type, id);
             return nodes;
         }
 
@@ -60,5 +60,16 @@ namespace HiveMind.Services.Graph.Controllers
         {
             _graphService.Delete(id);
         }
+
+        // GET: api/Graph/12/Related
+        [HttpPost("{type}/{id}/Related")]
+        public ActionResult SetRelated(string type, string id, Node target)
+        {
+            var source = new Node() { Id = id, Type = type };
+            var edge = new Edge() { Name = "RELATED_TO" };
+            _graphService.AddEdge(source, target, edge);
+            return Ok();
+        }
+
     }
 }
