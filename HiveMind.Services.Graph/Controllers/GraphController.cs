@@ -24,19 +24,20 @@ namespace HiveMind.Services.Graph.Controllers
             return Ok(nodes);
         }
 
+        // GET: api/Graph/5
+        [HttpGet("{type}/{id}")]
+        public ActionResult Get(string type, string id)
+        {
+            var node = _graphService.GetNode(type, id);
+            return Ok(node);
+        }
+
         // GET: api/Graph/12/Related
         [HttpGet("{id}/Related")]
-        public IEnumerable<RelatedNode> Get([FromRoute] string id)
+        public IEnumerable<RelatedNode> GetRelated([FromRoute] string id)
         {
             var nodes = _graphService.GetRelatedNodes(id);
             return nodes;
-        }
-
-        // GET: api/Graph/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST: api/Graph

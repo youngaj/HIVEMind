@@ -1,7 +1,5 @@
 ﻿using HiveMind.Common.General;
-using HiveMind.Common.Services;
 using HiveMind.Services.Graph.Entities;
-using Microsoft.Extensions.Configuration;
 using Neo4jClient;
 using Neo4jClient.Cypher;
 using System;
@@ -23,6 +21,8 @@ namespace HiveMind.Services.Graph.Services
         List<RelatedNode> GetRelatedNodes(string key);
 
         void UpdateNode(Entities.Node node);
+
+        Entities.Node GetNode(string type, string id);
     }
 
     public class GraphService : IGraphService
@@ -67,6 +67,17 @@ namespace HiveMind.Services.Graph.Services
                 }).ExecuteWithoutResults();
 
             return result;
+        }
+
+        public Entities.Node GetNode(string type, string id)
+        {
+            var node = _graphClient.Cypher
+                        .Match("(n)")
+                        .Where<Entities.Node>(n => n.Type == type && n.Id == id)
+                        .Return(n => n.As<Node<Entities.Node>>())
+                        .Results
+                        .Single();
+            return node.Data;
         }
 
         public List<Entities.Node> GetNodes()
@@ -119,21 +130,16 @@ namespace HiveMind.Services.Graph.Services
 
         public void UpdateNode(Entities.Node node)
         {
-            var updatedNode = _graphClient.Cypher
-                .Merge("(entity:" + node.Type + " { Id: {id} })")
-                .OnMatch()
-                .Set("entity = {nodeEntity}")
+            _graphClient.Cypher
+                .Merge("(node:" + node.Type + " { Id: {id}, Type: {type} })")
+                .OnCreate()
+                .Set("node = {nodeEntity}")
                 .WithParams(new
                 {
-                    Id = node.Id,
+                    id = node.Id,
+                    type = node.Type,
                     nodeEntity = node
-                })
-                .Return(entity => entity.As<Node<Entities.Node>>())
-                .Results
-                .Single();
-
-            if (updatedNode == null)
-                throw new Exception("Node update failed.");
+                }).ExecuteWithoutResults();
         }
     }
 }
