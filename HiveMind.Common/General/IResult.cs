@@ -6,12 +6,9 @@
         string Message { get; set; }
         bool IsSuccessful { get; }
         object Obj { get; set; }
-        void AddMessage(string msg);
-        void ClearMessages();
-    }
 
-    public interface IResultFactory
-    {
-        IResult CreateInstance();
+        void AddMessage(string msg);
+
+        void ClearMessages();
     }
 }

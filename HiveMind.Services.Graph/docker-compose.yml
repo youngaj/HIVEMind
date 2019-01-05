@@ -1,0 +1,9 @@
+﻿version: '2'
+services:
+  neo4j:
+    image: neo4j:3.3.0
+    environment:
+      - "NEO4J_AUTH:neo4j/neo4jPass"
+    ports:
+      - "27474:7474"
+      - "27687:7687"
