@@ -37,22 +37,16 @@ namespace HiveMind.Services.Graph
             //Load our object
             JObject jObject = JObject.Load(reader);
             var entityToken = jObject.Property("Entity").Value;
-            //Remove it so it's not deserialized by Json.NET
             jObject.Remove("Entity");
 
-            //Get the dictionary ourselves and deserialize
+            //Get the entity ourselves and deserialize
             var entity = JsonConvert.DeserializeObject(entityToken.ToString());
 
-            //The output
             var output = new Node();
-            //Deserialize all the normal properties
             output = JsonConvert.DeserializeObject<Node>(jObject.ToString());
-            //serializer.Populate(jObject.CreateReader(), output);
 
             //Add our entity
             output.Entity = entity;
-
-            //return
             return output;
         }
 

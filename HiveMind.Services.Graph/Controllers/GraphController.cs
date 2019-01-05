@@ -16,6 +16,7 @@ namespace HiveMind.Services.Graph.Controllers
             this._graphService = graphService;
         }
 
+        // GET: api/Graph
         [HttpGet]
         public ActionResult GetAll()
         {
@@ -38,25 +39,17 @@ namespace HiveMind.Services.Graph.Controllers
             return "value";
         }
 
+        // POST: api/Graph
         [HttpPost]
         public void PostTest(Node node)
         {
             _graphService.AddNode(node);
         }
 
-        // POST: api/Graph
-        [HttpPost("{type}/{id}")]
-        public void Post([FromRoute] string type, [FromRoute] string id, dynamic value)
+        // PUT: api/Graph
+        [HttpPut]
+        public void Put(Node node)
         {
-            var node = new Node() { Type = type, Id = id, Entity = value };
-            _graphService.AddNode(node);
-        }
-
-        // PUT: api/Graph/5
-        [HttpPut("{type}/{id}")]
-        public void Put(string type, [FromRoute] string id, [FromBody] object value)
-        {
-            var node = new Node() { Type = type, Id = id, Entity = value };
             _graphService.UpdateNode(node);
         }
 

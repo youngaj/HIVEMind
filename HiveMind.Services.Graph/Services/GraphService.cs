@@ -65,14 +65,6 @@ namespace HiveMind.Services.Graph.Services
                     type = node.Type,
                     nodeEntity = node
                 }).ExecuteWithoutResults();
-            //    .Return(entity => entity.As<Node<Entities.Node>>())
-            //    .Results
-            //    .Single();
-            //if (newNode == null)
-            //{
-            //    result.Type = ResultType.Failure;
-            //    result.AddMessage("New node not found after insert");
-            //}
 
             return result;
         }
