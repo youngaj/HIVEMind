@@ -32,10 +32,6 @@ namespace HiveMind.Services.Graph
         private GraphClient CreateGraphClient()
         {
             var serializer = new CustomNeo4jSerializer();
-            //var conn = Configuration.GetValue<string>("Neo4j:uri");
-            //var user = Configuration.GetValue<string>("Neo4j:user");
-            //var password = Configuration.GetValue<string>("Neo4j:password");
-            //var graphClient = new GraphClient(new Uri(conn), user, password)
             var conn = Configuration.GetValue<string>("Neo4j:conn");
             var graphClient = new GraphClient(new Uri(conn))
             {
@@ -43,7 +39,6 @@ namespace HiveMind.Services.Graph
                 JsonContractResolver = serializer
             };
             graphClient.Connect();
-            graphClient.JsonConverters.Add(new CustomNodeJsonConverter());
             return graphClient;
         }
 

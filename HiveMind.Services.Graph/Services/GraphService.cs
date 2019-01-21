@@ -2,7 +2,7 @@
 using HiveMind.Services.Graph.Entities;
 using Neo4jClient;
 using Neo4jClient.Cypher;
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,6 +54,7 @@ namespace HiveMind.Services.Graph.Services
         {
             var result = ResultFactory.CreateInstance();
             result.Type = ResultType.Successful;
+            var json = JsonConvert.SerializeObject(node.Entity, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 
             _graphClient.Cypher
                 .Merge("(node:" + node.Type + " { Id: {id}, Type: {type} })")
@@ -63,7 +64,7 @@ namespace HiveMind.Services.Graph.Services
                 {
                     id = node.Id,
                     type = node.Type,
-                    nodeEntity = node
+                    nodeEntity = json
                 }).ExecuteWithoutResults();
 
             return result;
@@ -71,73 +72,62 @@ namespace HiveMind.Services.Graph.Services
 
         public Entities.Node GetNode(string type, string id)
         {
-            var node = _graphClient.Cypher
+            var serializedNode = _graphClient.Cypher
                         .Match("(n)")
                         .Where<Entities.Node>(n => n.Type == type && n.Id == id)
-                        .Return(n => n.As<Node<Entities.Node>>())
+                        .Return(n => n.As<Node<SerializedNode>>())
                         .Results
-                        .Single();
-            return node.Data;
+                        .Single().Data;
+            var node = DeserializeNode(serializedNode);
+            return node;
         }
 
         public List<Entities.Node> GetNodes()
         {
-            var entities = new List<Entities.Node>();
-            entities = _graphClient.Cypher
+            var entities = _graphClient.Cypher
                         .Match("(entity)")
-                            .Return(entity => entity.As<Entities.Node>())
+                            .Return(entity => entity.As<SerializedNode>())
                             .Results
                             .ToList();
-            return entities;
+            var nodes = entities.Select(x => DeserializeNode(x)).ToList();
+            return nodes;
         }
+
+        private Entities.Node DeserializeNode(SerializedNode serializedNode)
+        {
+            Entities.Node node = null;
+            if (serializedNode != null)
+            {
+                node = new Entities.Node()
+                {
+                    Id = serializedNode.Id,
+                    Type = serializedNode.Type,
+                    Entity = JsonConvert.DeserializeObject(serializedNode.Entity),
+                };
+            }
+            return node;
+        }
+
         public List<RelatedNode> GetRelatedNodes(string type, string id)
         {
-            var results = _graphClient.Cypher
+            var relatedEntities = new List<RelatedNode>();
+
+            var query = new CypherFluentQuery(_graphClient)
                             .Match("(a)-[r]-(b)")
                             .Where<Entities.Node>(a => a.Type == type && a.Id == id)
                             .Return((a, r, b) => new
                             {
-                                source = a.As<Entities.Node>(),
-                                target = b.As<Entities.Node>(),
+                                source = a.As<SerializedNode>(),
+                                target = b.As<SerializedNode>(),
                                 relationship = r.As<Relationship>().RelationshipTypeKey,
-                                relationshipData = r.As<Relationship>().Data
-                            })
-                            .Results;
-
-            var relatedEntities = new List<RelatedNode>();
-
-            foreach (var item in results)
-            {
-                var relatedEntity = new RelatedNode();
-                relatedEntity.Relationship = new Edge() { Data = item.relationshipData, Name = item.relationship };
-                relatedEntity.Node = item.target;
-                relatedEntities.Add(relatedEntity);
-            }
-
-            return relatedEntities;
-        }
-
-        public List<RelatedNode> GetRelatedNodes2(string key)
-        {
-            var query = new CypherFluentQuery(_graphClient)
-                            .Match("(findEntity)-[(relation)]->(relatedEntity)")
-                            .Return((findEntity, relation, relatedEntity) => new
-                            {
-                                entity = findEntity.As<Entities.Node>(),
-                                r = relation.As<Relationship>(),
-                                relatedEntity = relatedEntity.As<Entities.Node>()
                             });
+            var results = query.Results;
 
-            var queryText = query.Query.QueryText;
-            var paramText = query.Query.QueryParameters;
-            var results = query.Results.ToList();
-
-            var relatedEntities = new List<RelatedNode>();
             foreach (var item in results)
             {
                 var relatedEntity = new RelatedNode();
-                relatedEntity.Relationship = new Edge() { Data = item.r.Data, Name = item.r.RelationshipTypeKey };
-                relatedEntity.Node = item.relatedEntity;
+                relatedEntity.Relationship = new Edge() { Name = "RELATED_TO" };
+                relatedEntity.Node = DeserializeNode(item.target);
                 relatedEntities.Add(relatedEntity);
             }
 

@@ -1,9 +1,10 @@
 ﻿namespace HiveMind.Services.Graph.Entities
 {
-    public class Node
+    internal class SerializedNode
     {
         public string Id { get; set; }
         public string Type { get; set; }
-        public object Entity { get; set; }
+        public string Entity { get; set; }
+
     }
 }
