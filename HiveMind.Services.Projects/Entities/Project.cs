@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MongoDB;
 
-namespace HiveMind.Services.Projects.Data
+namespace HiveMind.Services.Projects.Entities
 {
     public class Project
     {
@@ -14,5 +11,7 @@ namespace HiveMind.Services.Projects.Data
         public string Code { get; set; }
 
         public string Description { get; set; }
+
+        public List<ProjectMember> Personnel { get; set; }
     }
 }
